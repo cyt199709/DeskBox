@@ -14,7 +14,7 @@ enum ButtonType
 	ONLY_CLOSE_BUTTON
 };
 
-class TitleBar : public QObject
+class TitleBar : public QWidget
 {
 	Q_OBJECT
 
@@ -23,13 +23,13 @@ public:
 	~TitleBar();
 
 public:
-	void setTitleIcon(QString& filepath);
-	void setTitleContent(QString& titleContent);
+	void setTitleIcon(const QString& filepath);
+	void setTitleContent(const QString& titleContent);
 	void setTitleWidth(int width);
 	void setButton(ButtonType buttonType);
 
 	void saveRestoreInfo(const QPoint& point, const QSize& size);
-	void getRestoreInfo(const QPoint& point, const QSize& size);
+	void getRestoreInfo(QPoint& point, QSize& size);
 	
 private:
 	void paintEvent(QPaintEvent* event);
