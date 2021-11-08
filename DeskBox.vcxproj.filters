@@ -43,12 +43,18 @@
     <ClCompile Include="BasicWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NotifyManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TitleBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="BasicWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="NotifyManager.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

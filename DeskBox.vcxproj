@@ -86,6 +86,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasicWindow.cpp" />
+    <ClCompile Include="NotifyManager.cpp" />
     <ClCompile Include="TitleBar.cpp" />
     <QtRcc Include="DeskBox.qrc" />
     <QtMoc Include="DeskBox.h" />
@@ -97,6 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="BasicWindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="NotifyManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
