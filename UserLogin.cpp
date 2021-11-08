@@ -1,11 +1,28 @@
 #include "UserLogin.h"
 
-UserLogin::UserLogin(QWidget *parent)
-	: QWidget(parent)
+UserLogin::UserLogin(QWidget*parent)
+	: BasicWindow(parent)
 {
 	ui.setupUi(this);
+	setAttribute(Qt::WA_DeleteOnClose);
+	initTitleBar();
+	setTitleBarTitle("", ":/Resources/MainWindow/DeskBoxLogo.png");
+	loadStyleSheet("UserLogin");
+	initControl();
 }
 
 UserLogin::~UserLogin()
 {
+}
+
+
+void UserLogin::onLoginBtnClicked()
+{
+	close();
+
+}
+
+void UserLogin::initControl()
+{
+	connect(ui.LoginBtn, &QPushButton::clicked, this, &UserLogin::onLoginBtnClicked);
 }
