@@ -10,5 +10,6 @@
         <file>Resources/Icon/Title/restore.png</file>
         <file>Resources/QSS/Title.css</file>
         <file>Resources/QSS/UserLogin.css</file>
+        <file>Resources/Icon/DeskBoxLogo.png</file>
     </qresource>
 </RCC>

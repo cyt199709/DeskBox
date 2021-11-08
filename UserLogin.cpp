@@ -6,7 +6,7 @@ UserLogin::UserLogin(QWidget*parent)
 	ui.setupUi(this);
 	setAttribute(Qt::WA_DeleteOnClose);
 	initTitleBar();
-	setTitleBarTitle("", ":/Resources/MainWindow/DeskBoxLogo.png");
+	setTitleBarTitle("", ":/Resources/Icon/DeskBoxLogo.png");
 	loadStyleSheet("UserLogin");
 	initControl();
 }
