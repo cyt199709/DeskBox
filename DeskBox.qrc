@@ -1,4 +1,14 @@
 <RCC>
-    <qresource prefix="DeskBox">
+    <qresource prefix="/">
+        <file>Resources/Icon/checkbox_hightlight.png</file>
+        <file>Resources/Icon/checkbox_normal.png</file>
+        <file>Resources/Icon/checkbox_tick_highlight.png</file>
+        <file>Resources/Icon/checkbox_tick_normal.png</file>
+        <file>Resources/Icon/Title/close.png</file>
+        <file>Resources/Icon/Title/max.png</file>
+        <file>Resources/Icon/Title/min.png</file>
+        <file>Resources/Icon/Title/restore.png</file>
+        <file>Resources/QSS/Title.css</file>
+        <file>Resources/QSS/UserLogin.css</file>
     </qresource>
 </RCC>
