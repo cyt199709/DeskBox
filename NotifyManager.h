@@ -7,7 +7,7 @@ class NotifyManager : public QObject
 	Q_OBJECT
 
 public:
-	NotifyManager(QObject *parent);
+	NotifyManager();
 	~NotifyManager();
 
 signals:
