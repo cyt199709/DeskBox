@@ -89,6 +89,7 @@
     <ClCompile Include="CommonUtils.cpp" />
     <ClCompile Include="NotifyManager.cpp" />
     <ClCompile Include="TitleBar.cpp" />
+    <ClCompile Include="UserLogin.cpp" />
     <QtRcc Include="DeskBox.qrc" />
     <QtMoc Include="DeskBox.h" />
     <ClCompile Include="DeskBox.cpp" />
@@ -105,6 +106,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonUtils.h" />
+    <QtMoc Include="UserLogin.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="UserLogin.ui" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
