@@ -19,7 +19,7 @@ class TitleBar : public QWidget
 	Q_OBJECT
 
 public:
-	TitleBar(QWidget *parent);
+	TitleBar(QWidget *parent = nullptr);
 	~TitleBar();
 
 public:
