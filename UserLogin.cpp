@@ -1,4 +1,5 @@
 #include "UserLogin.h"
+#include "MainWindow.h"
 
 UserLogin::UserLogin(QWidget*parent)
 	: BasicWindow(parent)
@@ -19,7 +20,8 @@ UserLogin::~UserLogin()
 void UserLogin::onLoginBtnClicked()
 {
 	close();
-
+	MainWindow* mainWindow = new MainWindow;
+	mainWindow->show();
 }
 
 void UserLogin::initControl()
