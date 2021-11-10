@@ -11,5 +11,13 @@
         <file>Resources/QSS/Title.css</file>
         <file>Resources/QSS/UserLogin.css</file>
         <file>Resources/Icon/DeskBoxLogo.png</file>
+        <file>Resources/QSS/MainWindow.css</file>
+        <file>Resources/Icon/2014_btn_hover.gft.png</file>
+        <file>Resources/Icon/edit.png</file>
+        <file>Resources/Icon/bottom/menu_btn_highlight.png</file>
+        <file>Resources/Icon/bottom/menu_btn_normal.png</file>
+        <file>Resources/Icon/bottom/menu_btn2_down.png</file>
+        <file>Resources/Icon/2014_btn_down.gft.png</file>
+        <file>Resources/Icon/big_logo.png</file>
     </qresource>
 </RCC>

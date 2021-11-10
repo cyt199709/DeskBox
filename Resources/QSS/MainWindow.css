@@ -1,0 +1,67 @@
+* {
+    font-family: Microsoft YaHei;
+}
+
+QWidget#MainWindow
+{
+    background-color:#ffffff;
+    border: 1px solid #cccccc;
+    border-radius:4px;
+}
+
+QWidget#searchWidget {
+    background-color:rgba(22, 154, 218, 50);
+}
+
+QLineEdit#SearchLineEdit {
+    background-color:transparent;
+}
+
+QLineEdit#SearchLineEdit {
+    background-color:transparent;
+    text-align:center;
+}
+
+QLineEdit#SearchLineEdit:hover {
+    border-image:url(:Resources/Icon/2014_btn_hover.gft.png);
+    border-width:2px;
+    padding-left:-2px;
+}
+
+QLineEdit#SearchLineEdit:focus {
+    border-image:url(:Resources/Icon/edit.png);
+    border-width:2px;
+    padding-left:-2px;
+}
+
+QTableView#ToolTableView{
+    background-color:transparent;
+    border-top-left-radius:4px;
+    border-top-right-radius:0px;
+    border-bottom-left-radius:4px;
+}
+
+QTableView#FileTableView{
+    background-color:transparent;
+    border-top-left-radius:4px;
+    border-top-right-radius:0px;
+    border-bottom-left-radius:4px;
+}
+
+QPushButton#MenuBtn{
+    border-image:url(:Resources/Icon/bottom/menu_btn_normal.png);
+}
+
+QPushButton#MenuBtn:hover{
+    background-image:url(:Resources/Icon/bottom/menu_btn_highlight.png);
+    background-position:center;
+    border-image:url(:Resources/Icon/2014_btn_hover.gft.png);
+    border-width:2px;
+}
+
+QPushButton#MenuBtn:pressed{
+    background-image:url(:Resources/Icon/bottom/menu_btn2_down.png);
+    background-position:center;
+    border-image:url(:Resources/Icon/2014_btn_down.gft.png);
+    border-width:2px;
+}
