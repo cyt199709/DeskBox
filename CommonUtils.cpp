@@ -31,14 +31,14 @@ void CommonUtils::setDefaultSkinColor(const QColor& color)
 
 QColor CommonUtils::getDefaultSkinColor()
 {
-	const QString& path = QApplication::applicationDirPath() + "/" + QString("tradeprintinfo.ini");
+	const QString&& path = QApplication::applicationDirPath() + "/" + QString("tradeprintinfo.ini");
 	if (!QFile::exists(path))
 		setDefaultSkinColor(QColor(240, 225, 229));
 
 	QSettings settings(path, QSettings::IniFormat);
 	QColor color;
-	color.setRed(settings.value("Default/red").toInt());
-	color.setGreen(settings.value("Default/green").toInt());
-	color.setBlue(settings.value("Default/blue").toInt());
+	color.setRed(settings.value("DefaultSkin/red").toInt());
+	color.setGreen(settings.value("DefaultSkin/green").toInt());
+	color.setBlue(settings.value("DefaultSkin/blue").toInt());
 	return color;
 }

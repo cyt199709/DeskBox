@@ -1,14 +1,19 @@
 #include "BasicWindow.h"
+#include "NotifyManager.h"
+#include "CommonUtils.h"
 #include <QStyleOption>
 #include <QPainter>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QMouseEvent>
 
 BasicWindow::BasicWindow(QWidget *parent)
 	: QDialog(parent)
 {
+	m_colorBackGround = CommonUtils::getDefaultSkinColor();
 	setWindowFlags(Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground, true);
+	connect(NotifyManager::getInstance(), SIGNAL(signalSkinChanged(const QColor&)), this, SLOT(onSignalSkinChanged(const QColor&)));
 }
 
 BasicWindow::~BasicWindow()
@@ -33,7 +38,7 @@ void BasicWindow::loadStyleSheet(const QString& sheetName)
 								{background-color:rgb(%1,%2,%3);\
 								border-top-left-radius:4px;}\
 								QWidget[bottomSkin=true]\
-								{border-top:lpx solid rgba(%1,%2,%3,100);\
+								{border-top:1px solid rgba(%1,%2,%3,100);\
 								background-color:rgba(%1,%2,%3,50);\
 								border-bottom-left-radius:4px;\
 								border-bottom-right-radius:4px;}")
@@ -65,7 +70,7 @@ void BasicWindow::mousePressEvent(QMouseEvent* event)
 	{
 		m_mousePressed = true;
 		m_mousePoint = event->globalPos() - pos();
-		accept();
+		event->accept();
 	}
 }
 
@@ -81,6 +86,7 @@ void BasicWindow::mouseMoveEvent(QMouseEvent* event)
 void BasicWindow::mouseReleaseEvent(QMouseEvent* event)
 {
 	m_mousePressed = false;
+	event->accept();
 }
 
 void BasicWindow::initTitleBar(ButtonType buttonType)
@@ -114,7 +120,14 @@ void BasicWindow::onShowMin(bool)
 
 void BasicWindow::onShowHide(bool)
 {
-	hide();
+	if (Qt::Tool == (windowFlags() & Qt::Tool))
+	{
+		hide();
+	}
+	else
+	{
+		showMinimized();
+	}
 }
 
 void BasicWindow::onShowNormal(bool)

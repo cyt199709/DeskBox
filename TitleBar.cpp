@@ -86,6 +86,8 @@ void TitleBar::paintEvent(QPaintEvent* event)
 	{
 		setFixedWidth(parentWidget()->width());
 	}
+
+	return QWidget::paintEvent(event);
 }
 
 void TitleBar::mouseDoubleClickEvent(QMouseEvent* event)
@@ -116,6 +118,8 @@ void TitleBar::mousePressEvent(QMouseEvent* event)
 		m_isPressed = true;
 		m_startMovePos = event->globalPos();
 	}
+
+	return QWidget::mousePressEvent(event);
 }
 
 void TitleBar::mouseMoveEvent(QMouseEvent* event)
@@ -159,7 +163,7 @@ void TitleBar::initControl()
 	m_pRestoreBtn->setObjectName("RestoreBtn");
 	m_pCloseBtn->setObjectName("CloseBtn");
 
-	QHBoxLayout* titleLayout = new QHBoxLayout;
+	QHBoxLayout* titleLayout = new QHBoxLayout(this);
 	titleLayout->addWidget(m_pIcon);
 	titleLayout->addWidget(m_pTitleContent);
 	titleLayout->addWidget(m_pMinBtn);
@@ -184,7 +188,7 @@ void TitleBar::initConnections()
 
 void TitleBar::loadStyleSheet(const QString& sheetName)
 {
-	QFile file(":/Resources/QSS" + sheetName + ".css");
+	QFile file(":/Resources/QSS/" + sheetName + ".css");
 	file.open(QFile::ReadOnly);
 	if (file.isOpen())
 	{
