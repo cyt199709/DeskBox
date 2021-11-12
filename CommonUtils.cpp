@@ -33,7 +33,7 @@ QColor CommonUtils::getDefaultSkinColor()
 {
 	const QString&& path = QApplication::applicationDirPath() + "/" + QString("tradeprintinfo.ini");
 	if (!QFile::exists(path))
-		setDefaultSkinColor(QColor(240, 225, 229));
+		setDefaultSkinColor(QColor(162, 167, 167));
 
 	QSettings settings(path, QSettings::IniFormat);
 	QColor color;
