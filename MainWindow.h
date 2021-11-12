@@ -1,8 +1,12 @@
 #pragma once
 
 #include <QWidget>
+#include <QLinkedList>
 #include "BasicWindow.h"
 #include "ui_MainWindow.h"
+
+class MainWindowItem;
+enum TYPE;
 
 class MainWindow : public BasicWindow
 {
@@ -14,11 +18,20 @@ public:
 
 private:
 	void initControl();
+	void getIniInfo();
 
 private slots:
-	void onAddToolClicked();
-	void onAddFileClicked();
+	void onAddClicked(TYPE type, QString filePath);
+	void onMenuBtnClicked();
+	void onMenuItemClicked();
+
+protected:
+	virtual void paintEvent(QPaintEvent* event);
 
 private:
 	Ui::MainWindow ui;
+
+private:
+	QList<MainWindowItem*> m_toolList;
+	QList<MainWindowItem*> m_fileList;
 };

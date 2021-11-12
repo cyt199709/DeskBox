@@ -18,7 +18,7 @@ private:
 	void initBackGroundColor();
 
 protected:
-	void paintEvent(QPaintEvent*);
+	virtual void paintEvent(QPaintEvent*);
 	void mousePressEvent(QMouseEvent* event);
 	void mouseMoveEvent(QMouseEvent* event);
 	void mouseReleaseEvent(QMouseEvent* event);

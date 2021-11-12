@@ -21,6 +21,8 @@ public:
 	MainWindowItem(QWidget *parent = Q_NULLPTR, TYPE type = TOOL, const QString& filePath = "");
 	~MainWindowItem();
 
+	bool createSuccess();
+
 private:
 	void initControl();
 	void getFileInfo();
@@ -31,7 +33,7 @@ private:
 	virtual void paintEvent(QPaintEvent* event);
 
 signals:
-	void signalItemClicked(TYPE, QString);
+	void signalAddClicked(TYPE, QString);
 	void signalItemDelete(TYPE, QString);
 
 private slots:
@@ -49,4 +51,5 @@ private:
 	QPixmap* m_backPix;
 
 	bool m_isPressed;
+	bool m_isSuccess;
 };
