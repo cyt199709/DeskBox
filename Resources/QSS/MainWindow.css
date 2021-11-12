@@ -34,14 +34,14 @@ QLineEdit#SearchLineEdit:focus {
     padding-left:-2px;
 }
 
-QTableView#ToolTableView{
+QTableWidget#ToolTableWidget{
     background-color:transparent;
     border-top-left-radius:4px;
     border-top-right-radius:0px;
     border-bottom-left-radius:4px;
 }
 
-QTableView#FileTableView{
+QTableWidget#FileTableWidget{
     background-color:transparent;
     border-top-left-radius:4px;
     border-top-right-radius:0px;

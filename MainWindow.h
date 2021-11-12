@@ -13,5 +13,12 @@ public:
 	~MainWindow();
 
 private:
+	void initControl();
+
+private slots:
+	void onAddToolClicked();
+	void onAddFileClicked();
+
+private:
 	Ui::MainWindow ui;
 };

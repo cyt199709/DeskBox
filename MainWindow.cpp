@@ -14,4 +14,19 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+
+}
+
+void MainWindow::initControl()
+{
+
+}
+
+void MainWindow::onAddToolClicked()
+{
+}
+
+void MainWindow::onAddFileClicked()
+{
+
 }
