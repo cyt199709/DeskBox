@@ -88,6 +88,7 @@
     <ClCompile Include="BasicWindow.cpp" />
     <ClCompile Include="CommonUtils.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="MainWindowItem.cpp" />
     <ClCompile Include="NotifyManager.cpp" />
     <ClCompile Include="TitleBar.cpp" />
     <ClCompile Include="UserLogin.cpp" />
@@ -107,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonUtils.h" />
+    <QtMoc Include="MainWindowItem.h" />
     <QtMoc Include="MainWindow.h" />
     <QtMoc Include="UserLogin.h" />
   </ItemGroup>
