@@ -1,12 +1,15 @@
 #include "MainWindow.h"
 #include "MainWindowItem.h"
 #include "CommonUtils.h"
+#include "NotifyManager.h"
+#include "SysTray.h"
 #include <QMenu>
 #include <QSettings>
 #include <QTableWidgetItem>
 #include <QTableWidget>
 #include <QMessageBox>
 #include <QFileInfo>
+#include <QSystemTrayIcon>
 
 MainWindow::MainWindow(QWidget *parent)
 	: BasicWindow(parent)
@@ -17,6 +20,11 @@ MainWindow::MainWindow(QWidget *parent)
 	setTitleBarTitle("", ":/Resources/Icon/big_logo.png");
 	loadStyleSheet("MainWindow");
 	initControl();
+
+	SysTray* systray = new SysTray(this);
+	setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
+	disconnect(m_dis);
+	connect(m_titleBar, &TitleBar::signalButtonCloseClicked, [this](){QApplication::quit(); });
 
 }
 

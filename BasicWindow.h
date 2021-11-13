@@ -45,5 +45,8 @@ protected:
 	bool m_mousePressed;
 	QColor m_colorBackGround;
 	QString m_styleName;
+
+protected:
 	TitleBar* m_titleBar;
+	QMetaObject::Connection m_dis;
 };

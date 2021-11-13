@@ -19,5 +19,6 @@
         <file>Resources/Icon/bottom/menu_btn2_down.png</file>
         <file>Resources/Icon/2014_btn_down.gft.png</file>
         <file>Resources/Icon/big_logo.png</file>
+        <file>Resources/Icon/trLogo.png</file>
     </qresource>
 </RCC>

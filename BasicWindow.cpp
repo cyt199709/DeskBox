@@ -7,6 +7,7 @@
 #include <QDesktopWidget>
 #include <QMouseEvent>
 
+//166,202,219
 BasicWindow::BasicWindow(QWidget *parent)
 	: QDialog(parent)
 {
@@ -99,7 +100,7 @@ void BasicWindow::initTitleBar(ButtonType buttonType)
 	connect(m_titleBar, SIGNAL(signalButtonMinClicked()), this, SLOT(onButtonMinClicked()));
 	connect(m_titleBar, SIGNAL(signalButtonRestoreClicked()), this, SLOT(onButtonRestoreClicked()));
 	connect(m_titleBar, SIGNAL(signalButtonMaxClicked()), this, SLOT(onButtonMaxClicked()));
-	connect(m_titleBar, SIGNAL(signalButtonCloseClicked()), this, SLOT(onButtonCloseClicked()));
+	m_dis = connect(m_titleBar, SIGNAL(signalButtonCloseClicked()), this, SLOT(onButtonCloseClicked()));
 }
 
 void BasicWindow::setTitleBarTitle(const QString& title, const QString& icon)
@@ -132,7 +133,7 @@ void BasicWindow::onShowHide(bool)
 
 void BasicWindow::onShowNormal(bool)
 {
-	show();
+	showNormal();
 	activateWindow();
 }
 
