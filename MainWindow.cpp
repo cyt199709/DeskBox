@@ -26,6 +26,11 @@ MainWindow::MainWindow(QWidget *parent)
 	disconnect(m_dis);
 	connect(m_titleBar, &TitleBar::signalButtonCloseClicked, [this](){QApplication::quit(); });
 
+	connect(NotifyManager::getInstance(), &NotifyManager::signalSkinChanged, [this]() {
+		updateSearchStyle();
+	});
+
+	qApp->installEventFilter(this);
 }
 
 MainWindow::~MainWindow()
@@ -89,6 +94,23 @@ void MainWindow::getIniInfo()
 	{
 		ui.ToolTableWidget->setCellWidget(i / 5, i % 5, m_toolList[i]);
 	}
+}
+
+void MainWindow::updateSearchStyle()
+{
+	ui.searchWidget->setStyleSheet(QString("QWidget#searchWidget{background-color:rgba(%1,%2,%3,50);border-bottom:1px solid rgba(%1,%2,%3,30)}")
+		.arg(m_colorBackGround.red())
+		.arg(m_colorBackGround.green())
+		.arg(m_colorBackGround.blue()));
+}
+
+bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
+	if (event->type() == QEvent::MouseButtonPress && obj != ui.SearchLineEdit)
+	{
+		ui.SearchLineEdit->clearFocus();
+		this->setFocus();
+	}
+	return false;
 }
 
 void MainWindow::onAddClicked(TYPE type, QString filePath)

@@ -19,6 +19,8 @@ public:
 private:
 	void initControl();
 	void getIniInfo();
+	void updateSearchStyle();
+	bool eventFilter(QObject* obj, QEvent* event);
 
 private slots:
 	void onAddClicked(TYPE type, QString filePath);

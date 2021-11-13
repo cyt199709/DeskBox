@@ -9,17 +9,8 @@ QWidget#MainWindow
     border-radius:4px;
 }
 
-QWidget#searchWidget {
-    background-color:rgba(22, 154, 218, 50);
-}
-
 QLineEdit#SearchLineEdit {
     background-color:transparent;
-}
-
-QLineEdit#SearchLineEdit {
-    background-color:transparent;
-    text-align:center;
 }
 
 QLineEdit#SearchLineEdit:hover {
