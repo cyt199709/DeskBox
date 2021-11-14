@@ -224,6 +224,16 @@ void MainWindowItem::paintEvent(QPaintEvent* event)
 	m_icon->setPixmap(pixmap);
 }
 
+QString MainWindowItem::getFileName()
+{
+	return m_fileName;
+}
+
+TYPE MainWindowItem::getType()
+{
+	return m_type;
+}
+
 void MainWindowItem::onActionClicked()
 {
 	QAction* pAction = qobject_cast<QAction*>(sender());

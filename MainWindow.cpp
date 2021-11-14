@@ -20,17 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
 	setTitleBarTitle("", ":/Resources/Icon/big_logo.png");
 	loadStyleSheet("MainWindow");
 	initControl();
-
-	SysTray* systray = new SysTray(this);
-	setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
-	disconnect(m_dis);
-	connect(m_titleBar, &TitleBar::signalButtonCloseClicked, [this](){QApplication::quit(); });
-
-	connect(NotifyManager::getInstance(), &NotifyManager::signalSkinChanged, [this]() {
-		updateSearchStyle();
-	});
-
-	qApp->installEventFilter(this);
 }
 
 MainWindow::~MainWindow()
@@ -46,6 +35,19 @@ void MainWindow::initControl()
 	ui.FileTableWidget->setColumnCount(5);
 	ui.FileTableWidget->setRowCount(16);
 	getIniInfo();
+
+	connect(ui.SearchLineEdit, &QLineEdit::textChanged, this, &MainWindow::onSearchLineEditChanged);
+
+	SysTray* systray = new SysTray(this);
+	setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
+	disconnect(m_dis);
+	connect(m_titleBar, &TitleBar::signalButtonCloseClicked, [this]() {QApplication::quit(); });
+
+	connect(NotifyManager::getInstance(), &NotifyManager::signalSkinChanged, [this]() {
+		updateSearchStyle();
+		});
+
+	qApp->installEventFilter(this);
 }
 
 void MainWindow::getIniInfo()
@@ -86,14 +88,7 @@ void MainWindow::getIniInfo()
 			delete item;
 	}
 
-	for (int i = 0; i < m_fileList.size(); i++)
-	{
-		ui.FileTableWidget->setCellWidget(i / 5, i % 5, m_fileList[i]);
-	}
-	for (int i = 0; i < m_toolList.size(); i++)
-	{
-		ui.ToolTableWidget->setCellWidget(i / 5, i % 5, m_toolList[i]);
-	}
+	updateTable();
 }
 
 void MainWindow::updateSearchStyle()
@@ -111,6 +106,19 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
 		this->setFocus();
 	}
 	return false;
+}
+
+void MainWindow::updateTable()
+{
+
+	for (int i = 0; i < m_fileList.size(); i++)
+	{
+		ui.FileTableWidget->setCellWidget(i / 5, i % 5, m_fileList[i]);
+	}
+	for (int i = 0; i < m_toolList.size(); i++)
+	{
+		ui.ToolTableWidget->setCellWidget(i / 5, i % 5, m_toolList[i]);
+	}
 }
 
 void MainWindow::onAddClicked(TYPE type, QString filePath)
@@ -225,6 +233,30 @@ void MainWindow::onMenuItemClicked()
 	default:
 		break;
 	}
+}
+
+void MainWindow::onSearchLineEditChanged()
+{
+	QString str = ui.SearchLineEdit->text();
+	if (str.isEmpty())
+	{
+		foreach(MainWindowItem * item, m_fileList) 
+			item->setVisible(true);
+		foreach(MainWindowItem * item, m_toolList)
+			item->setVisible(true);
+		return;
+	}
+	foreach(MainWindowItem * item, m_fileList)
+	{
+		if (!item->getFileName().contains(str) && item->getType() != ADD_TOOL && item->getType() != ADD_FILE)
+			item->setVisible(false);
+	}
+	foreach(MainWindowItem * item, m_toolList)
+	{
+		if (!item->getFileName().contains(str) && item->getType() != ADD_TOOL && item->getType() != ADD_FILE)
+			item->setVisible(false);
+	}
+
 }
 
 void MainWindow::paintEvent(QPaintEvent* event)

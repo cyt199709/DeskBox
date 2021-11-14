@@ -21,11 +21,13 @@ private:
 	void getIniInfo();
 	void updateSearchStyle();
 	bool eventFilter(QObject* obj, QEvent* event);
+	void updateTable();
 
 private slots:
 	void onAddClicked(TYPE type, QString filePath);
 	void onMenuBtnClicked();
 	void onMenuItemClicked();
+	void onSearchLineEditChanged();
 
 protected:
 	virtual void paintEvent(QPaintEvent* event);

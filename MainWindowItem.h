@@ -22,6 +22,8 @@ public:
 	~MainWindowItem();
 
 	bool createSuccess();
+	QString getFileName();
+	TYPE getType();
 
 private:
 	void initControl();
