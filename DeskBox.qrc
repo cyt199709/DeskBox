@@ -28,5 +28,6 @@
         <file>Resources/Icon/btn_mini_down.gft.png</file>
         <file>Resources/Icon/btn_mini_highlight.gft.png</file>
         <file>Resources/Icon/btn_mini_normal.gft.png</file>
+        <file>Resources/QSS/RegisterWindow.css</file>
     </qresource>
 </RCC>

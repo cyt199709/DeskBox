@@ -147,6 +147,9 @@
           <height>26</height>
          </size>
         </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
         <property name="placeholderText">
          <string>请输入密码</string>
         </property>

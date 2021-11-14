@@ -1,0 +1,37 @@
+* {
+    font-family: Microsoft YaHei;
+}
+
+QWidget#RegisterWindow {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+QPushButton#sysMin {
+    border-image: url(:Resources/Icon/btn_mini_normal.gft.png);
+}
+
+QPushButton#sysMin:hover {
+    border-image: url(:Resources/Icon/btn_mini_highlight.gft.png);
+}
+
+QPushButton#sysMin:pressed {
+    border-image: url(:Resources/Icon/btn_mini_down.gft.png);
+}
+
+QPushButton#sysClose {
+    border-image: url(:Resources/Icon/btn_close_normal.gft.png);
+}
+
+QPushButton#sysClose:hover {
+    border-image: url(:Resources/Icon/btn_close_highlight.gft.png);
+}
+
+QPushButton#sysClose:pressed {
+    border-image: url(:Resources/Icon/btn_close_down.gft.png);
+}
+
+QLabel#titleIcon {
+    background-image: url(:Resources/Icon/trLogo.png);
+}

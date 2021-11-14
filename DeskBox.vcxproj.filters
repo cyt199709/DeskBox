@@ -67,6 +67,9 @@
     <ClCompile Include="ClickLabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RegisterWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TitleBar.h">
@@ -96,6 +99,9 @@
     <QtMoc Include="ClickLabel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="RegisterWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonUtils.h">
@@ -110,6 +116,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="SkinWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="RegisterWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

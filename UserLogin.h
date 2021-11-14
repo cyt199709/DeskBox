@@ -14,6 +14,9 @@ public:
 
 private slots:
 	void onLoginBtnClicked();
+	void onKeepPwdCheckStateChanged(int state);
+	void onRegistBtnClicked();
+	void onForgetPwdBtnClicked();
 
 private:
 	void initControl();
