@@ -3,6 +3,7 @@
 #include "CommonUtils.h"
 #include "NotifyManager.h"
 #include "SysTray.h"
+#include "SkinWindow.h"
 #include <QMenu>
 #include <QSettings>
 #include <QTableWidgetItem>
@@ -16,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	ui.setupUi(this);
 	setAttribute(Qt::WA_DeleteOnClose);
+	setAttribute(Qt::WA_QuitOnClose, true);
 	initTitleBar();
 	setTitleBarTitle("", ":/Resources/Icon/big_logo.png");
 	loadStyleSheet("MainWindow");
@@ -41,7 +43,7 @@ void MainWindow::initControl()
 	SysTray* systray = new SysTray(this);
 	setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
 	disconnect(m_dis);
-	connect(m_titleBar, &TitleBar::signalButtonCloseClicked, [this]() {QApplication::quit(); });
+	connect(m_titleBar, &TitleBar::signalButtonCloseClicked, [this]() {	QApplication::quit(); });
 
 	connect(NotifyManager::getInstance(), &NotifyManager::signalSkinChanged, [this]() {
 		updateSearchStyle();
@@ -228,8 +230,11 @@ void MainWindow::onMenuItemClicked()
 		// 打开设置窗口
 		break;
 	case 3:
-		// 打开换肤
+	{
+		SkinWindow* skinWindow = new SkinWindow;
+		skinWindow->exec();
 		break;
+	}
 	default:
 		break;
 	}

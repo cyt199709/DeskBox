@@ -61,6 +61,12 @@
     <ClCompile Include="SysTray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SkinWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClickLabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TitleBar.h">
@@ -84,6 +90,12 @@
     <QtMoc Include="SysTray.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="SkinWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ClickLabel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonUtils.h">
@@ -95,6 +107,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="MainWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="SkinWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
