@@ -3,6 +3,7 @@
 #include "BasicWindow.h"
 #include "ui_OptionWindow.h"
 #include <QWidget>
+#include <QListWidgetItem>
 
 class OptionWindow : public BasicWindow
 {
@@ -13,5 +14,15 @@ public:
 	~OptionWindow();
 
 private:
+	void initControl();
+	void initAccount();
+
+private slots:
+	void onAccountChangeBtnClicked();
+
+private:
 	Ui::OptionWindow ui;
+
+private:
+	QMap<QListWidgetItem*, QWidget*> m_optionWindowItemMap;
 };
