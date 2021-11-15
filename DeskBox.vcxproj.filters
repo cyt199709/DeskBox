@@ -70,6 +70,9 @@
     <ClCompile Include="RegisterWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OptionWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TitleBar.h">
@@ -102,6 +105,9 @@
     <QtMoc Include="RegisterWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="OptionWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonUtils.h">
@@ -119,6 +125,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="RegisterWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="OptionWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

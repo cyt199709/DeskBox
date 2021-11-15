@@ -1,0 +1,23 @@
+<UI version="4.0" >
+ <class>OptionWindow</class>
+ <widget class="BaseWindow" name="OptionWindow" >
+  <property name="objectName" >
+   <string notr="true">OptionWindow</string>
+  </property>
+  <property name="geometry" >
+   <rect>
+	<x>0</x>
+	<y>0</y>
+	<width>400</width>
+	<height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>OptionWindow</string>
+  </property>
+ </widget>
+ <layoutDefault spacing="6" margin="11" />
+ <pixmapfunction></pixmapfunction>
+ <resources/>
+ <connections/>
+</UI>
