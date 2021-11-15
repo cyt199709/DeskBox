@@ -12,5 +12,8 @@ public:
 	~OptionWindowItem();
 
 private:
+	void initControl();
+
+private:
 	Ui::OptionWindowItem ui;
 };

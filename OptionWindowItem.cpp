@@ -9,3 +9,8 @@ OptionWindowItem::OptionWindowItem(QWidget *parent)
 OptionWindowItem::~OptionWindowItem()
 {
 }
+
+void OptionWindowItem::initControl()
+{
+	ui.colorLabel->setVisible(false);
+}
