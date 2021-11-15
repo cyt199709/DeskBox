@@ -92,6 +92,7 @@
     <ClCompile Include="MainWindowItem.cpp" />
     <ClCompile Include="NotifyManager.cpp" />
     <ClCompile Include="OptionWindow.cpp" />
+    <ClCompile Include="OptionWindowItem.cpp" />
     <ClCompile Include="RegisterWindow.cpp" />
     <ClCompile Include="SkinWindow.cpp" />
     <ClCompile Include="SysTray.cpp" />
@@ -112,6 +113,7 @@
     <QtMoc Include="NotifyManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="OptionWindowItem.h" />
     <QtMoc Include="OptionWindow.h" />
     <QtMoc Include="RegisterWindow.h" />
     <QtMoc Include="ClickLabel.h" />
@@ -125,6 +127,7 @@
   <ItemGroup>
     <QtUic Include="MainWindow.ui" />
     <QtUic Include="OptionWindow.ui" />
+    <QtUic Include="OptionWindowItem.ui" />
     <QtUic Include="RegisterWindow.ui" />
     <QtUic Include="SkinWindow.ui" />
     <QtUic Include="UserLogin.ui" />
