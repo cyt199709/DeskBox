@@ -29,5 +29,12 @@
         <file>Resources/Icon/btn_mini_highlight.gft.png</file>
         <file>Resources/Icon/btn_mini_normal.gft.png</file>
         <file>Resources/QSS/RegisterWindow.css</file>
+        <file>Resources/Icon/sysbtn_close_down.png</file>
+        <file>Resources/Icon/sysbtn_close_hover.png</file>
+        <file>Resources/Icon/sysbtn_close_normal.png</file>
+        <file>Resources/Icon/sysbtn_min_down.png</file>
+        <file>Resources/Icon/sysbtn_min_hover.png</file>
+        <file>Resources/Icon/sysbtn_min_normal.png</file>
+        <file>Resources/QSS/OptionWindow.css</file>
     </qresource>
 </RCC>

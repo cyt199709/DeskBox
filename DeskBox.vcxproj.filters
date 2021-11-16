@@ -76,6 +76,9 @@
     <ClCompile Include="OptionWindowItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AccountOptionWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TitleBar.h">
@@ -114,6 +117,9 @@
     <QtMoc Include="OptionWindowItem.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="AccountOptionWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonUtils.h">
@@ -137,6 +143,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="OptionWindowItem.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="AccountOptionWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

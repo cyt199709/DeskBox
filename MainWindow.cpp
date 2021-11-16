@@ -4,6 +4,7 @@
 #include "NotifyManager.h"
 #include "SysTray.h"
 #include "SkinWindow.h"
+#include "OptionWindow.h"
 #include <QMenu>
 #include <QSettings>
 #include <QTableWidgetItem>
@@ -227,12 +228,14 @@ void MainWindow::onMenuItemClicked()
 		// 打开个人中心
 		break;
 	case 2:
-		// 打开设置窗口
-		break;
-	case 3:
 	{
-		SkinWindow* skinWindow = new SkinWindow;
-		skinWindow->exec();
+		OptionWindow* optionWindow = new OptionWindow();
+		optionWindow->show();
+		break;
+	}case 3:
+	{
+		SkinWindow* skinWindow = new SkinWindow();
+		skinWindow->show();
 		break;
 	}
 	default:

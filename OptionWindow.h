@@ -5,6 +5,8 @@
 #include <QWidget>
 #include <QListWidgetItem>
 
+class OptionWindowItem;
+
 class OptionWindow : public BasicWindow
 {
 	Q_OBJECT
@@ -15,14 +17,15 @@ public:
 
 private:
 	void initControl();
-	void initAccount();
+	void addWindow(QWidget* window, OptionWindowItem* item);
 
 private slots:
-	void onAccountChangeBtnClicked();
+	void onOptionWindowItemClicked(QListWidgetItem* item);
 
 private:
 	Ui::OptionWindow ui;
 
 private:
 	QMap<QListWidgetItem*, QWidget*> m_optionWindowItemMap;
+	QMetaObject::Connection m_dis;
 };

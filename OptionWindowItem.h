@@ -13,6 +13,8 @@ public:
 
 private:
 	void initControl();
+
+public:
 	void setContext(const QString& text);
 	QString getContext() const;
 

@@ -1,15 +1,23 @@
 #include "OptionWindow.h"
+#include "OptionWindowItem.h"
+#include "AccountOptionWindow.h"
+#include "CommonUtils.h"
 #include <QLabel>
 #include <QPushButton>
 #include <QLineEdit>
 #include <QBoxLayout>
+#include <QSettings>
+#include <QCryptoGraphicHash>
+#include <QMessageBox>
 
 extern QString gAccount;
+extern QString gPath;
 
 OptionWindow::OptionWindow(QWidget *parent)
 	: BasicWindow(parent)
 {
 	ui.setupUi(this);
+	loadStyleSheet("OptionWindow");
 	setAttribute(Qt::WA_DeleteOnClose, true);
 	setAttribute(Qt::WA_QuitOnClose, false);
 
@@ -22,83 +30,42 @@ OptionWindow::~OptionWindow()
 
 void OptionWindow::initControl()
 {
+	loadStyleSheet("OptionWindow");
+	setWindowTitle(QString::fromLocal8Bit("…Ë÷√"));
 
+	QList<int> leftWidgetSize;
+	leftWidgetSize << 200 << width() - 200;
+	ui.splitter->setSizes(leftWidgetSize);
+
+	ui.listWidget->setStyle(new CustomProxyStyle(this));
+
+	connect(ui.listWidget, &QListWidget::itemClicked, this, &OptionWindow::onOptionWindowItemClicked);
+
+	connect(ui.sysMin, &QPushButton::clicked, this, &OptionWindow::onShowMin);
+	connect(ui.sysClose, &QPushButton::clicked, this, &OptionWindow::onShowClose);
+	
+	AccountOptionWindow* accountWindow = new AccountOptionWindow(this);
+	OptionWindowItem* item = new OptionWindowItem(accountWindow);
+	addWindow(accountWindow, item);
 }
 
-void OptionWindow::initAccount()
+void OptionWindow::addWindow(QWidget* window, OptionWindowItem* item)
 {
-	QWidget* accountOptionWindow = new QWidget(this);
-	QLabel* userName = new QLabel(QString::fromLocal8Bit("Í«≥∆:"));
-	QLabel* account = new QLabel(QString::fromLocal8Bit("’À∫≈:"));
-	QLabel* tel = new QLabel(QString::fromLocal8Bit("µÁª∞:"));
-	QLabel* mail = new QLabel(QString::fromLocal8Bit("” œ‰:"));
-	QPushButton* changePwd = new QPushButton(QString::fromLocal8Bit("–ﬁ∏ƒ√‹¬Î"));
-	QPushButton* changeName = new QPushButton(QString::fromLocal8Bit("–ﬁ∏ƒ"));
-	QPushButton* changeTel = new QPushButton(QString::fromLocal8Bit("–ﬁ∏ƒ"));
-	QPushButton* changeMail = new QPushButton(QString::fromLocal8Bit("–ﬁ∏ƒ"));
+	ui.rightStackedWidget->addWidget(window);
+	QListWidgetItem* aItem = new QListWidgetItem(ui.listWidget);
+	m_optionWindowItemMap.insert(aItem, window);
 
-	changePwd->setObjectName("ChangePwdBtn");
-	changeName->setObjectName("ChangeNameBtn");
-	changeTel->setObjectName("ChangeTelBtn");
-	changeMail->setObjectName("ChangeMailBtn");
+	aItem->setSelected(true);
+	item->setContext(QString::fromLocal8Bit("’À∫≈…Ë÷√"));
 
-	connect(changePwd, &QPushButton::clicked, this, &OptionWindow::onAccountChangeBtnClicked);
-	connect(changeName, &QPushButton::clicked, this, &OptionWindow::onAccountChangeBtnClicked);
-	connect(changeTel, &QPushButton::clicked, this, &OptionWindow::onAccountChangeBtnClicked);
-	connect(changeMail, &QPushButton::clicked, this, &OptionWindow::onAccountChangeBtnClicked);
+	ui.listWidget->addItem(aItem);
+	ui.listWidget->setItemWidget(aItem, item);
 
-	QLabel* accountLabel = new QLabel(gAccount);
-	QLineEdit* nameLineEdit = new QLineEdit(this);
-	QLineEdit* telLineEdit = new QLineEdit(this);
-	QLineEdit* mailLineEdit = new QLineEdit(this);
-
-	QHBoxLayout* userNameLayout = new QHBoxLayout(accountOptionWindow);
-	userNameLayout->addWidget(userName);
-	userNameLayout->addWidget(nameLineEdit);
-	userNameLayout->addWidget(changeName);
-
-	QHBoxLayout* accountLayout = new QHBoxLayout(accountOptionWindow);
-	accountLayout->addWidget(account);
-	accountLayout->addWidget(accountLabel);
-	accountLayout->addStretch();
-
-	QHBoxLayout* telLayout = new QHBoxLayout(accountOptionWindow);
-	telLayout->addWidget(userName);
-	telLayout->addWidget(telLineEdit);
-	telLayout->addWidget(changeTel);
-
-	QHBoxLayout* mailLayout = new QHBoxLayout(accountOptionWindow);
-	mailLayout->addWidget(mail);
-	mailLayout->addWidget(mailLineEdit);
-	mailLayout->addWidget(changeMail);
-
-	QVBoxLayout* mainLayout = new QVBoxLayout(accountOptionWindow);
-	mainLayout->addLayout(accountLayout);
-	mainLayout->addLayout(userNameLayout);
-	mainLayout->addLayout(telLayout);
-	mainLayout->addLayout(mailLayout);
-	mainLayout->addWidget(changePwd);
-	mainLayout->addStretch();
-	accountOptionWindow->setLayout(mainLayout);
+	onOptionWindowItemClicked(aItem);
 }
 
-void OptionWindow::onAccountChangeBtnClicked()
+void OptionWindow::onOptionWindowItemClicked(QListWidgetItem* item)
 {
-	QWidget* item = qobject_cast<QWidget*>(sender());
-	if (item->objectName() == "ChangePwdBtn")
-	{
-
-	}
-	else if (item->objectName() == "ChangeNameBtn")
-	{
-
-	}
-	else if (item->objectName() == "ChangeTelBtn")
-	{
-
-	}
-	else if (item->objectName() == "ChangeMailBtn")
-	{
-
-	}
+	QWidget* optionWindowWidget = m_optionWindowItemMap.find(item).value();
+	ui.rightStackedWidget->setCurrentWidget(optionWindowWidget);
 }
