@@ -12,6 +12,7 @@
 
 extern QString gAccount;
 extern QString gPath;
+extern QColor gBackColor;
 
 OptionWindow::OptionWindow(QWidget *parent)
 	: BasicWindow(parent)
@@ -20,7 +21,6 @@ OptionWindow::OptionWindow(QWidget *parent)
 	loadStyleSheet("OptionWindow");
 	setAttribute(Qt::WA_DeleteOnClose, true);
 	setAttribute(Qt::WA_QuitOnClose, false);
-
 	initControl();
 }
 
@@ -47,6 +47,8 @@ void OptionWindow::initControl()
 	AccountOptionWindow* accountWindow = new AccountOptionWindow(this);
 	OptionWindowItem* item = new OptionWindowItem(accountWindow);
 	addWindow(accountWindow, item);
+	connect(accountWindow, &AccountOptionWindow::onConfirmClicked, [this]() {close(); });
+	connect(accountWindow, &AccountOptionWindow::onCancelClicked, [this]() {close(); });
 }
 
 void OptionWindow::addWindow(QWidget* window, OptionWindowItem* item)

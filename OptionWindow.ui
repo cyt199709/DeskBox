@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>OptionWindow</class>
- <widget class="BaseWindow" name="OptionWindow">
+ <widget class="BasicWindow" name="OptionWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -210,7 +210,7 @@ QSplitter::handle:horizontal{
       <property name="currentIndex">
        <number>-1</number>
       </property>
-      <property name="bottomSkin" stdset="0">
+      <property name="rightSkin" stdset="0">
        <bool>true</bool>
       </property>
      </widget>
@@ -221,9 +221,9 @@ QSplitter::handle:horizontal{
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>BaseWindow</class>
+   <class>BasicWindow</class>
    <extends>QWidget</extends>
-   <header>basewindow.h</header>
+   <header>BasicWindow.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

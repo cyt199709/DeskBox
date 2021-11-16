@@ -7,11 +7,13 @@
 #include <QDesktopWidget>
 #include <QMouseEvent>
 
-//166,202,219
+QColor gBackColor;
+
 BasicWindow::BasicWindow(QWidget *parent)
 	: QDialog(parent)
 {
 	m_colorBackGround = CommonUtils::getDefaultSkinColor();
+	gBackColor = m_colorBackGround;
 	setWindowFlags(Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground, true);
 	connect(NotifyManager::getInstance(), SIGNAL(signalSkinChanged(const QColor&)), this, SLOT(onSignalSkinChanged(const QColor&)));
@@ -35,6 +37,13 @@ void BasicWindow::loadStyleSheet(const QString& sheetName)
 		QString g = QString::number(m_colorBackGround.green());
 		QString b = QString::number(m_colorBackGround.blue());
 
+		QString r1 = QString::number(m_colorBackGround.red() + 10);
+		QString g1 = QString::number(m_colorBackGround.green() + 10);
+		QString b1 = QString::number(m_colorBackGround.blue() + 10);
+		r1 = QString::number((r1.toInt() > 255) ? 255 : r1.toInt());
+		g1 = QString::number((g1.toInt() > 255) ? 255 : g1.toInt());
+		b1 = QString::number((b1.toInt() > 255) ? 255 : b1.toInt());
+
 		qssStyleSheet += QString("QWidget[titleSkin=true]\
 								{background-color:rgb(%1,%2,%3);\
 								border-top-left-radius:4px;}\
@@ -42,8 +51,13 @@ void BasicWindow::loadStyleSheet(const QString& sheetName)
 								{border-top:1px solid rgba(%1,%2,%3,100);\
 								background-color:rgba(%1,%2,%3,50);\
 								border-bottom-left-radius:4px;\
+								border-bottom-right-radius:4px;}\
+								QWidget[rightSkin=true]\
+								{border-top:1px solid rgba(%4,%5,%6,100);\
+								background-color:rgb(%4,%5,%6);\
+								border-bottom-left-radius:4px;\
 								border-bottom-right-radius:4px;}")
-								.arg(r).arg(g).arg(b);
+								.arg(r).arg(g).arg(b).arg(r1).arg(g1).arg(b1);
 		setStyleSheet(qssStyleSheet);
 	}
 

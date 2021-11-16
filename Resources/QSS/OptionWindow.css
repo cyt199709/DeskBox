@@ -136,3 +136,23 @@ QLineEdit#UserNameLineEdit:enabled, QLineEdit#AccountLineEdit:enabled, QLineEdit
     background-color: #ffffff;
     border-style: solid;
 }
+
+QPushButton#confirmBtn, QPushButton#cancelBtn, QPushButton#applyBtn{
+    font-size:12px;
+    background:rgb(7, 189, 253);
+    color:#ffffff;
+    border:none;
+    border-radius:4px;
+}
+
+QPushButton#confirmBtn:hover, QPushButton#confirmBtn:pressed{
+    background:rgb(33, 200, 253);
+}
+
+QPushButton#cancelBtn:hover, QPushButton#cancelBtn:pressed{
+    background:rgb(33, 200, 253);
+}
+
+QPushButton#applyBtn:hover, QPushButton#applyBtn:pressed{
+    background:rgb(33, 200, 253);
+}

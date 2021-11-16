@@ -6,6 +6,7 @@
 
 extern QString gAccount;
 extern QString gPath;
+extern QColor gBackColor;
 
 AccountOptionWindow::AccountOptionWindow(QWidget *parent)
 	: QWidget(parent)
@@ -32,6 +33,11 @@ void AccountOptionWindow::initControl()
 	connect(ui.MailChangeBtn, &QPushButton::clicked, this, &AccountOptionWindow::onMailChangeBtnClicked);
 
 	connect(ui.PasswordChangeBtn, &QPushButton::clicked, this, &AccountOptionWindow::onPwdChangeBtnClicked);
+
+	connect(ui.confirmBtn, SIGNAL(clicked()), this, SIGNAL(onConfirmClicked()));
+	connect(ui.cancelBtn, SIGNAL(clicked()), this, SIGNAL(onCancelClicked()));
+	connect(ui.applyBtn, SIGNAL(clicked()), this, SIGNAL(onApplyClicked()));
+
 }
 
 void AccountOptionWindow::onNameChangeBtnClicked()
@@ -110,6 +116,7 @@ void AccountOptionWindow::onPwdChangeBtnClicked()
 	pwdChangeWidget->show();
 	connect(cancel, &QPushButton::clicked, pwdChangeWidget, &QWidget::close);
 	pwdChangeWidget->setAttribute(Qt::WA_DeleteOnClose);
+	pwdChangeWidget->setAttribute(Qt::WA_QuitOnClose,false);
 
 	connect(confirm, &QPushButton::clicked, [oriPwdLineEdit, newPwdLineEdit]() {
 		QSettings settings(gPath + "Account", QSettings::IniFormat);
