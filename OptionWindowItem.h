@@ -13,6 +13,13 @@ public:
 
 private:
 	void initControl();
+	void setContext(const QString& text);
+	QString getContext() const;
+
+private:
+	void enterEvent(QEvent* event);
+	void leaveEvent(QEvent* event);
+	void resizeEvent(QResizeEvent* event);
 
 private:
 	Ui::OptionWindowItem ui;
