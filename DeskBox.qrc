@@ -36,5 +36,8 @@
         <file>Resources/Icon/sysbtn_min_hover.png</file>
         <file>Resources/Icon/sysbtn_min_normal.png</file>
         <file>Resources/QSS/OptionWindow.css</file>
+        <file>Resources/Icon/arrow.png</file>
+        <file>Resources/Icon/left_arrow.png</file>
+        <file>Resources/QSS/UserCenter.css</file>
     </qresource>
 </RCC>

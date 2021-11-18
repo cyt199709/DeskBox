@@ -5,6 +5,7 @@
 #include "SysTray.h"
 #include "SkinWindow.h"
 #include "OptionWindow.h"
+#include "UserCenter.h"
 #include <QMenu>
 #include <QSettings>
 #include <QTableWidgetItem>
@@ -12,6 +13,8 @@
 #include <QMessageBox>
 #include <QFileInfo>
 #include <QSystemTrayIcon>
+
+QList<QString> gFileList;
 
 MainWindow::MainWindow(QWidget *parent)
 	: BasicWindow(parent)
@@ -74,7 +77,10 @@ void MainWindow::getIniInfo()
 		fileSettings.endGroup();
 		MainWindowItem* item = new MainWindowItem(ui.FileTableWidget, type, filePath);
 		if (item->createSuccess())
+		{
 			m_fileList.push_back(item);
+			gFileList.push_back(item->getFilePath());
+		}
 		else
 			delete item;
 	}
@@ -86,7 +92,10 @@ void MainWindow::getIniInfo()
 		TYPE type = (TYPE)ToolSettings.value("type").toInt();
 		MainWindowItem* item = new MainWindowItem(ui.FileTableWidget, type, filePath);
 		if (item->createSuccess())
+		{
 			m_toolList.push_back(item);
+			gFileList.push_back(item->getFilePath());
+		}
 		else
 			delete item;
 	}
@@ -144,6 +153,7 @@ void MainWindow::onAddClicked(TYPE type, QString filePath)
 		{
 			int pos = m_toolList.size();
 			m_toolList.push_back(item);
+			gFileList.push_back(item->getFilePath());
 			toolSettings.setValue(fileinfo.fileName() + "/type", type);
 			toolSettings.setValue(fileinfo.fileName() + "/filePath", filePath);
 			ui.ToolTableWidget->setCellWidget(pos / 5, pos % 5, m_toolList[pos]);
@@ -163,6 +173,7 @@ void MainWindow::onAddClicked(TYPE type, QString filePath)
 		{
 			int pos = m_fileList.size();
 			m_fileList.push_back(item);
+			gFileList.push_back(item->getFilePath());
 			fileSettings.setValue(fileinfo.fileName() + "/type", type);
 			fileSettings.setValue(fileinfo.fileName() + "/filePath", filePath);
 			ui.FileTableWidget->setCellWidget(pos / 5, pos % 5, m_fileList[pos]);
@@ -225,8 +236,11 @@ void MainWindow::onMenuItemClicked()
 	switch (data)
 	{
 	case 1:
-		// 打开个人中心
+	{
+		UserCenter* userCenter = new UserCenter;
+		userCenter->show();
 		break;
+	}
 	case 2:
 	{
 		OptionWindow* optionWindow = new OptionWindow();
