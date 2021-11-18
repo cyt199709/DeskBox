@@ -97,6 +97,7 @@
     <ClCompile Include="RegisterWindow.cpp" />
     <ClCompile Include="SkinWindow.cpp" />
     <ClCompile Include="SysTray.cpp" />
+    <ClCompile Include="tableWidget.cpp" />
     <ClCompile Include="TitleBar.cpp" />
     <ClCompile Include="UserCenter.cpp" />
     <ClCompile Include="UserLogin.cpp" />
@@ -115,6 +116,7 @@
     <QtMoc Include="NotifyManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="tableWidget.h" />
     <QtMoc Include="UserCenter.h" />
     <QtMoc Include="OptionWindowItem.h" />
     <QtMoc Include="OptionWindow.h" />

@@ -139,7 +139,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QTableWidget" name="ToolTableWidget">
+       <widget class="tableWidget" name="ToolTableWidget">
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
@@ -163,6 +163,15 @@
         </property>
         <property name="tabKeyNavigation">
          <bool>false</bool>
+        </property>
+        <property name="dragEnabled">
+         <bool>true</bool>
+        </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::DragDrop</enum>
+        </property>
+        <property name="defaultDropAction">
+         <enum>Qt::MoveAction</enum>
         </property>
         <property name="textElideMode">
          <enum>Qt::ElideNone</enum>
@@ -234,7 +243,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QTableWidget" name="FileTableWidget">
+       <widget class="tableWidget" name="FileTableWidget">
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
@@ -258,6 +267,15 @@
         </property>
         <property name="tabKeyNavigation">
          <bool>false</bool>
+        </property>
+        <property name="dragEnabled">
+         <bool>true</bool>
+        </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::DragDrop</enum>
+        </property>
+        <property name="defaultDropAction">
+         <enum>Qt::CopyAction</enum>
         </property>
         <property name="textElideMode">
          <enum>Qt::ElideNone</enum>
@@ -383,6 +401,13 @@
   <zorder>titleWidget</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>tableWidget</class>
+   <extends>QTableWidget</extends>
+   <header location="global">tablewidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

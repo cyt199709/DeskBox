@@ -20,7 +20,6 @@ private:
 	void initControl();
 	void getIniInfo();
 	void updateSearchStyle();
-	bool eventFilter(QObject* obj, QEvent* event);
 	void updateTable();
 
 private slots:
@@ -31,6 +30,10 @@ private slots:
 
 protected:
 	virtual void paintEvent(QPaintEvent* event);
+	virtual void dragEnterEvent(QDragEnterEvent* event);
+	virtual void dragMoveEvent(QDragEnterEvent* event);
+	virtual void dropEvent(QDropEvent* event);
+	virtual bool eventFilter(QObject* obj, QEvent* event);
 
 private:
 	Ui::MainWindow ui;
@@ -38,4 +41,6 @@ private:
 private:
 	QList<MainWindowItem*> m_toolList;
 	QList<MainWindowItem*> m_fileList;
+	QList<QString> m_filePathList;
+	QList<QString> m_toolPathList;
 };

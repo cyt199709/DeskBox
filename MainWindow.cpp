@@ -13,6 +13,7 @@
 #include <QMessageBox>
 #include <QFileInfo>
 #include <QSystemTrayIcon>
+#include <QMimeData>
 
 QList<QString> gFileList;
 
@@ -26,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
 	setTitleBarTitle("", ":/Resources/Icon/big_logo.png");
 	loadStyleSheet("MainWindow");
 	initControl();
+	setAcceptDrops(true);
 }
 
 MainWindow::~MainWindow()
@@ -38,8 +40,12 @@ void MainWindow::initControl()
 	connect(ui.MenuBtn, &QPushButton::clicked, this, &MainWindow::onMenuBtnClicked);
 	ui.ToolTableWidget->setColumnCount(5);
 	ui.ToolTableWidget->setRowCount(16);
+	ui.ToolTableWidget->setAcceptDrops(true);
+	//ui.ToolTableWidget->installEventFilter(this);
 	ui.FileTableWidget->setColumnCount(5);
 	ui.FileTableWidget->setRowCount(16);
+	ui.FileTableWidget->setAcceptDrops(true);
+	//ui.FileTableWidget->installEventFilter(this);
 	getIniInfo();
 
 	connect(ui.SearchLineEdit, &QLineEdit::textChanged, this, &MainWindow::onSearchLineEditChanged);
@@ -112,17 +118,35 @@ void MainWindow::updateSearchStyle()
 }
 
 bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
+	if (obj == ui.FileTableWidget->viewport())
+	{
+		if (event->type() == QEvent::Drop)
+		{
+			const QMimeData* mime = ((QDropEvent*)event)->mimeData();
+			if (mime->hasFormat("text/url-list"))
+			{
+				int a = 0;
+			}
+		}
+	}
+	else if (obj == ui.ToolTableWidget->viewport())
+	{
+		if (event->type() == QEvent::Drop)
+		{
+			int a = 0;
+		}
+	}
+
 	if (event->type() == QEvent::MouseButtonPress && obj != ui.SearchLineEdit)
 	{
 		ui.SearchLineEdit->clearFocus();
 		this->setFocus();
 	}
-	return false;
+	return QWidget::eventFilter(obj, event);
 }
 
 void MainWindow::updateTable()
 {
-
 	for (int i = 0; i < m_fileList.size(); i++)
 	{
 		ui.FileTableWidget->setCellWidget(i / 5, i % 5, m_fileList[i]);
@@ -284,4 +308,33 @@ void MainWindow::onSearchLineEditChanged()
 void MainWindow::paintEvent(QPaintEvent* event)
 {
 	return BasicWindow::paintEvent(event);
+}
+
+void MainWindow::dragEnterEvent(QDragEnterEvent* event)
+{
+	event->accept();
+}
+
+void MainWindow::dragMoveEvent(QDragEnterEvent* event)
+{
+
+}
+
+void MainWindow::dropEvent(QDropEvent* event)
+{
+	QList<QUrl> urls = event->mimeData()->urls();
+	if (urls.isEmpty())
+		return;
+	//qDebug() << urls.size();
+	foreach(QUrl u, urls)
+	{
+		QString filepath = u.toLocalFile();
+		QFileInfo fileInfo(filepath);
+		if (filepath.contains(".exe") || filepath.contains(".url") || filepath.contains(".lnk"))
+			onAddClicked(TOOL, filepath);
+		else if (fileInfo.isDir())
+			onAddClicked(FOLDER, filepath);
+		else if (fileInfo.isFile())
+			onAddClicked(REG_FILE, filepath);
+	}
 }
