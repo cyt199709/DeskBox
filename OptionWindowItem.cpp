@@ -47,3 +47,8 @@ void OptionWindowItem::resizeEvent(QResizeEvent* event)
 {
 	__super::resizeEvent(event);
 }
+
+void OptionWindowItem::mousePressEvent(QMouseEvent* event)
+{
+	emit signalClicked();
+}

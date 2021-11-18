@@ -9,6 +9,9 @@
 #include <QSettings>
 #include <QCryptoGraphicHash>
 #include <QMessageBox>
+#include <QCheckBox>
+#include <QFileInfo>
+#include <QDir>
 
 extern QString gAccount;
 extern QString gPath;
@@ -45,29 +48,68 @@ void OptionWindow::initControl()
 	connect(ui.sysClose, &QPushButton::clicked, this, &OptionWindow::onShowClose);
 	
 	AccountOptionWindow* accountWindow = new AccountOptionWindow(this);
-	OptionWindowItem* item = new OptionWindowItem(accountWindow);
-	addWindow(accountWindow, item);
-	connect(accountWindow, &AccountOptionWindow::onConfirmClicked, [this]() {close(); });
-	connect(accountWindow, &AccountOptionWindow::onCancelClicked, [this]() {close(); });
+	OptionWindowItem* accountItem = new OptionWindowItem(accountWindow);
+	accountItem->setContext(QString::fromLocal8Bit("账号设置"));
+	addWindow(accountWindow, accountItem);
+	m_optionWindowMap.key((QWidget*)(accountWindow))->setSelected(true);
+	ui.rightStackedWidget->setCurrentWidget(accountWindow);
+	connect(accountItem, &OptionWindowItem::signalClicked, this, &OptionWindow::onOptionWindowItemClicked);
+
+	initStartWindow();
+}
+
+void OptionWindow::initStartWindow()
+{
+	QWidget* start = new QWidget(this);
+	QCheckBox* startCheckBox = new QCheckBox(QString::fromLocal8Bit("开机自启"), this);
+	QVBoxLayout* vLayout = new QVBoxLayout(this);
+	vLayout->addStretch(20);
+	vLayout->addWidget(startCheckBox);
+	vLayout->addStretch(160);
+	start->setLayout(vLayout);
+
+	OptionWindowItem* startItem = new OptionWindowItem(start);
+	startItem->setContext(QString::fromLocal8Bit("设置开机自启"));
+	addWindow(start, startItem);
+	connect(startCheckBox, &QCheckBox::stateChanged, this, &OptionWindow::onStartStateChanged);
+	connect(startItem, &OptionWindowItem::signalClicked, this, &OptionWindow::onOptionWindowItemClicked);
 }
 
 void OptionWindow::addWindow(QWidget* window, OptionWindowItem* item)
 {
 	ui.rightStackedWidget->addWidget(window);
 	QListWidgetItem* aItem = new QListWidgetItem(ui.listWidget);
-	m_optionWindowItemMap.insert(aItem, window);
-
-	aItem->setSelected(true);
-	item->setContext(QString::fromLocal8Bit("账号设置"));
+	m_optionWindowMap.insert(aItem, window);
+	m_optionWindowItemMap.insert(window, item);
 
 	ui.listWidget->addItem(aItem);
 	ui.listWidget->setItemWidget(aItem, item);
-
-	onOptionWindowItemClicked(aItem);
 }
 
-void OptionWindow::onOptionWindowItemClicked(QListWidgetItem* item)
+void OptionWindow::onOptionWindowItemClicked()
 {
-	QWidget* optionWindowWidget = m_optionWindowItemMap.find(item).value();
+	OptionWindowItem* item = (OptionWindowItem*)sender();
+	QWidget* optionWindowWidget = m_optionWindowItemMap.key(item);
 	ui.rightStackedWidget->setCurrentWidget(optionWindowWidget);
+}
+
+void OptionWindow::onStartStateChanged(int state)
+{
+	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::Registry64Format);
+	QFileInfo fileInfo(QApplication::applicationFilePath());
+	QString name = fileInfo.baseName();
+	QString path = settings.value(name).toString();
+
+	if (state == 0)
+	{
+		settings.remove(name);
+	}
+	else if (state == 2)
+	{
+		QString newPath = QDir::toNativeSeparators(QApplication::applicationFilePath());
+		if (path != newPath)
+		{
+			settings.setValue(name, newPath);
+		}
+	}
 }

@@ -34,9 +34,9 @@ void AccountOptionWindow::initControl()
 
 	connect(ui.PasswordChangeBtn, &QPushButton::clicked, this, &AccountOptionWindow::onPwdChangeBtnClicked);
 
-	connect(ui.confirmBtn, SIGNAL(clicked()), this, SIGNAL(onConfirmClicked()));
+	/*connect(ui.confirmBtn, SIGNAL(clicked()), this, SIGNAL(onConfirmClicked()));
 	connect(ui.cancelBtn, SIGNAL(clicked()), this, SIGNAL(onCancelClicked()));
-	connect(ui.applyBtn, SIGNAL(clicked()), this, SIGNAL(onApplyClicked()));
+	connect(ui.applyBtn, SIGNAL(clicked()), this, SIGNAL(onApplyClicked()));*/
 
 }
 

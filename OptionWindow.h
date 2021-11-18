@@ -17,15 +17,18 @@ public:
 
 private:
 	void initControl();
+	void initStartWindow();
 	void addWindow(QWidget* window, OptionWindowItem* item);
 
 private slots:
-	void onOptionWindowItemClicked(QListWidgetItem* item);
+	void onOptionWindowItemClicked();
+	void onStartStateChanged(int state);
 
 private:
 	Ui::OptionWindow ui;
 
 private:
-	QMap<QListWidgetItem*, QWidget*> m_optionWindowItemMap;
+	QMap<QListWidgetItem*, QWidget*> m_optionWindowMap;
+	QMap< QWidget*, OptionWindowItem*> m_optionWindowItemMap;
 	QMetaObject::Connection m_dis;
 };

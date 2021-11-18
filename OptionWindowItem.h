@@ -23,6 +23,12 @@ private:
 	void leaveEvent(QEvent* event);
 	void resizeEvent(QResizeEvent* event);
 
+protected:
+	virtual void mousePressEvent(QMouseEvent* event);
+
+signals:
+	void signalClicked();
+
 private:
 	Ui::OptionWindowItem ui;
 };

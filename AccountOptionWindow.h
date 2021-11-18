@@ -20,10 +20,10 @@ private slots:
 	void onMailChangeBtnClicked();
 	void onPwdChangeBtnClicked();
 
-signals:
+signals:/*
 	void onConfirmClicked();
 	void onCancelClicked();
-	void onApplyClicked();
+	void onApplyClicked();*/
 
 private:
 	Ui::AccountOptionWindow ui;
