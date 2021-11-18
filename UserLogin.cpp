@@ -7,7 +7,7 @@
 #include <QMessageBox>
 #include <QCryptographicHash>
 
-const QString path = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).at(0) + "/AppData/Local/DeskBox/";
+QString gPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).at(0) + "/AppData/Local/DeskBox/";
 QString gAccount;
 
 UserLogin::UserLogin(QWidget*parent)
@@ -32,7 +32,7 @@ void UserLogin::onLoginBtnClicked()
 	QString account = ui.AccountLineEdit->text();
 	QString pwd = ui.PasswordLineEdit->text();
 
-	QSettings settings(path + QString("Account"), QSettings::IniFormat);
+	QSettings settings(gPath + QString("Account"), QSettings::IniFormat);
 	if (!settings.childGroups().contains(account))
 	{
 		QMessageBox::information(nullptr, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("账号不存在"));

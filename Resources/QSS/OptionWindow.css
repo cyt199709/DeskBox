@@ -1,0 +1,158 @@
+* {
+    font-family: Microsoft YaHei;
+}
+
+QWidget#frameWidget{
+	background-color:#ffffff;
+	border-top:1px solid #eeeeee;
+	border-bottom:1px solid #eeeeee;
+}
+
+QPushButton#sysMin {
+   border-image: url(:Resources/Icon/sysbtn_min_normal.png);
+}
+QPushButton#sysMin:hover {
+   border-image: url(:Resources/Icon/sysbtn_min_hover.png);
+}
+QPushButton#sysMin:pressed {
+   border-image: url(:Resources/Icon/sysbtn_min_down.png);
+}
+
+QPushButton#sysClose {
+   border-image: url(:Resources/Icon/sysbtn_close_normal.png);
+}
+QPushButton#sysClose:hover {
+   border-image: url(:Resources/Icon/sysbtn_close_hover.png);
+}
+QPushButton#sysClose:pressed {
+   border-image: url(:Resources/Icon/sysbtn_close_down.png);
+}
+
+QLabel#context {
+    font-size: 16px;
+    color:#333333;
+}
+
+QWidget#listWidget{
+border-top-left-radius:4px;
+border-top-right-radius:0px;
+border-bottom-left-radius:4px;
+}
+
+QListView {
+    background-color: rgb(48, 165, 106);
+    padding:4px;
+}
+
+QListView::item{
+	border-radius:4px;
+	background-color: transparent;
+	height:44px;
+}
+
+QListView::item:selected {
+    border-radius:4px;
+    background-color: rgba(141, 210, 235, 150);
+}
+
+QListView::item:selected:!active {
+     border-radius:4px;
+     background-color: rgba(141, 210, 235, 150);
+}
+
+QListView::item:selected:active {
+     border-radius:4px;
+    background-color: rgba(141, 210, 235, 150);
+}
+
+QListView::item:hover {
+    background-color: rgba(141, 210, 235, 100);
+}
+
+QListView {
+    border:1px solid rgb(55, 143, 207);
+    selection-background-color: rgb(55, 143, 207);
+	background-color: #ffffff;
+}
+
+QAbstractItemView {
+    color:#333333;
+    font-size:12px;
+}
+
+ QScrollBar:horizontal{
+     background: #ffffff;
+     height: 6px;
+ }
+ QScrollBar::handle:horizontal{
+     background:#cccccc;
+     border-radius:3px;
+     height: 6px;
+ }
+
+ QScrollBar::sub-line:horizontal{
+     background:transparent;
+ }
+ QScrollBar::add-line:horizontal{
+     background:transparent;
+ }
+
+ QScrollBar:vertical {
+     background: #ffffff;
+     width: 6px;
+ }
+ QScrollBar::handle:vertical {
+     background:#cccccc;
+     border-radius:3px;
+     width: 6px;
+ }
+
+ QScrollBar::sub-line:vertical {
+     background:transparent;
+ }
+ QScrollBar::add-line:vertical {
+     background:transparent;
+ }
+ 
+ QWidget#titleWidget{
+	 border-top:0px;
+ }
+
+QPushButton#NameChangeBtn, QPushButton#TelChangeBtn, QPushButton#MailChangeBtn{
+    background:transparent;
+    font-size: 12px;
+    color: rgb(0,148, 206);
+    border:none;
+}
+
+QLineEdit#UserNameLineEdit:disabled, QLineEdit#AccountLineEdit:disabled, QLineEdit#TelLineEdit:disabled, QLineEdit#MailLineEdit:disabled{
+    background: transparent;
+    border-with:0;
+    border-style:outset;
+}
+
+QLineEdit#UserNameLineEdit:enabled, QLineEdit#AccountLineEdit:enabled, QLineEdit#TelLineEdit:enabled, QLineEdit#MailLineEdit:enabled{
+    border-width: 1;
+    background-color: #ffffff;
+    border-style: solid;
+}
+
+QPushButton#confirmBtn, QPushButton#cancelBtn, QPushButton#applyBtn{
+    font-size:12px;
+    background:rgb(7, 189, 253);
+    color:#ffffff;
+    border:none;
+    border-radius:4px;
+}
+
+QPushButton#confirmBtn:hover, QPushButton#confirmBtn:pressed{
+    background:rgb(33, 200, 253);
+}
+
+QPushButton#cancelBtn:hover, QPushButton#cancelBtn:pressed{
+    background:rgb(33, 200, 253);
+}
+
+QPushButton#applyBtn:hover, QPushButton#applyBtn:pressed{
+    background:rgb(33, 200, 253);
+}
