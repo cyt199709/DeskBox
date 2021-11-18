@@ -229,6 +229,11 @@ QString MainWindowItem::getFileName()
 	return m_fileName;
 }
 
+QString MainWindowItem::getFilePath()
+{
+	return m_filePath;
+}
+
 TYPE MainWindowItem::getType()
 {
 	return m_type;

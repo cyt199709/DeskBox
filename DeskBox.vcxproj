@@ -98,6 +98,7 @@
     <ClCompile Include="SkinWindow.cpp" />
     <ClCompile Include="SysTray.cpp" />
     <ClCompile Include="TitleBar.cpp" />
+    <ClCompile Include="UserCenter.cpp" />
     <ClCompile Include="UserLogin.cpp" />
     <QtRcc Include="DeskBox.qrc" />
     <QtMoc Include="DeskBox.h" />
@@ -114,6 +115,7 @@
     <QtMoc Include="NotifyManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="UserCenter.h" />
     <QtMoc Include="OptionWindowItem.h" />
     <QtMoc Include="OptionWindow.h" />
     <QtMoc Include="RegisterWindow.h" />
@@ -133,6 +135,7 @@
     <QtUic Include="OptionWindowItem.ui" />
     <QtUic Include="RegisterWindow.ui" />
     <QtUic Include="SkinWindow.ui" />
+    <QtUic Include="UserCenter.ui" />
     <QtUic Include="UserLogin.ui" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

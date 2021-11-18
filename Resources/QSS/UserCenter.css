@@ -1,0 +1,64 @@
+* {
+    font-family: Microsoft YaHei;
+}
+
+QWidget#frameWidget{
+    background-color:#ffffff;
+    border-top:1px solid #eeeeee;
+    border-bottom:1px solid #eeeeee;
+}
+
+QPushButton#sysMin {
+    border-image: url(:Resources/Icon/sysbtn_min_normal.png);
+}
+
+QPushButton#sysMin:hover {
+    border-image: url(:Resources/Icon/sysbtn_min_hover.png);
+}
+
+QPushButton#sysMin:pressed {
+    border-image: url(:Resources/Icon/sysbtn_min_down.png);
+}
+
+QPushButton#sysClose {
+    border-image: url(:Resources/Icon/sysbtn_close_normal.png);
+}
+
+QPushButton#sysClose:hover {
+    border-image: url(:Resources/Icon/sysbtn_close_hover.png);
+}
+
+QPushButton#sysClose:pressed {
+    border-image: url(:Resources/Icon/sysbtn_close_down.png);
+}
+
+QWidget#listWidget{
+    border-top-left-radius:4px;
+    border-top-right-radius:0px;
+    border-bottom-left-radius:4px;
+}
+
+QPushButton#fileBtn, QPushButton#softInfoBtn {
+    border-image: url(:Resources/Icon/arrow.png);
+}
+
+QPushButton#returnBtn1, QPushButton#returnBtn2 {
+    border-image: url(:Resources/Icon/left_arrow.png);
+}
+
+QPlainTextEdit{
+    background: transparent;
+}
+
+QPushButton#loginOutBtn{
+    font-size:12px;
+    background:rgb(7, 189, 253);
+    color:#ffffff;
+    border:none;
+    border-radius:1px;
+}
+
+QPushButton#loginOutBtn:hover, QPushButton#loginOutBtn:pressed{
+    background:rgb(33, 200, 253);
+}
+

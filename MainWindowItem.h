@@ -23,6 +23,7 @@ public:
 
 	bool createSuccess();
 	QString getFileName();
+	QString getFilePath();
 	TYPE getType();
 
 private:
