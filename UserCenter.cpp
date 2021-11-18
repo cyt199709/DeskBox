@@ -31,11 +31,12 @@ UserCenter::~UserCenter()
 void UserCenter::initControl()
 {
 	QSettings settings(gPath + "Account", QSettings::IniFormat);
-	ui.userNameLabel->setText(QString::fromLocal8Bit("用户名:") + settings.value(gAccount).toString());
+	ui.userNameLabel->setText(QString::fromLocal8Bit("用户名:") + settings.value(gAccount + "/UserName").toString());
 	ui.accountLabel->setText(QString::fromLocal8Bit("账号:") + gAccount);
-	ui.timeLabel->setText(QString::fromLocal8Bit("最后打开软件时间") + gTime.toString());
+	ui.timeLabel->setText(QString::fromLocal8Bit("最后打开软件时间:") + gTime.toString());
 	QPixmap pix(":/Resources/Icon/trLogo.png");
-	pix.scaled(ui.icon->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+	QSize size = ui.icon->size();
+	pix = pix.scaled(size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 	ui.icon->setPixmap(pix);
 
 	connect(ui.fileBtn, &QPushButton::clicked, [this]() {

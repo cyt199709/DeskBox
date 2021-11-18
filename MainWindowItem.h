@@ -37,7 +37,7 @@ private:
 
 signals:
 	void signalAddClicked(TYPE, QString);
-	void signalItemDelete(TYPE, QString);
+	void signalItemDelete(MainWindowItem*);
 
 private slots:
 	void onActionClicked();

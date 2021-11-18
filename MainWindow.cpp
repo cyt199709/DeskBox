@@ -41,11 +41,9 @@ void MainWindow::initControl()
 	ui.ToolTableWidget->setColumnCount(5);
 	ui.ToolTableWidget->setRowCount(16);
 	ui.ToolTableWidget->setAcceptDrops(true);
-	//ui.ToolTableWidget->installEventFilter(this);
 	ui.FileTableWidget->setColumnCount(5);
 	ui.FileTableWidget->setRowCount(16);
 	ui.FileTableWidget->setAcceptDrops(true);
-	//ui.FileTableWidget->installEventFilter(this);
 	getIniInfo();
 
 	connect(ui.SearchLineEdit, &QLineEdit::textChanged, this, &MainWindow::onSearchLineEditChanged);
@@ -86,6 +84,7 @@ void MainWindow::getIniInfo()
 		{
 			m_fileList.push_back(item);
 			gFileList.push_back(item->getFilePath());
+			//connect(item, &MainWindowItem::signalItemDelete, this, &MainWindow::onItemDelete);
 		}
 		else
 			delete item;
@@ -101,6 +100,7 @@ void MainWindow::getIniInfo()
 		{
 			m_toolList.push_back(item);
 			gFileList.push_back(item->getFilePath());
+			//connect(item, &MainWindowItem::signalItemDelete, this, &MainWindow::onItemDelete);
 		}
 		else
 			delete item;
@@ -178,6 +178,7 @@ void MainWindow::onAddClicked(TYPE type, QString filePath)
 			int pos = m_toolList.size();
 			m_toolList.push_back(item);
 			gFileList.push_back(item->getFilePath());
+			//connect(item, &MainWindowItem::signalItemDelete, this, &MainWindow::onItemDelete);
 			toolSettings.setValue(fileinfo.fileName() + "/type", type);
 			toolSettings.setValue(fileinfo.fileName() + "/filePath", filePath);
 			ui.ToolTableWidget->setCellWidget(pos / 5, pos % 5, m_toolList[pos]);
@@ -198,6 +199,7 @@ void MainWindow::onAddClicked(TYPE type, QString filePath)
 			int pos = m_fileList.size();
 			m_fileList.push_back(item);
 			gFileList.push_back(item->getFilePath());
+			//connect(item, &MainWindowItem::signalItemDelete, this, &MainWindow::onItemDelete);
 			fileSettings.setValue(fileinfo.fileName() + "/type", type);
 			fileSettings.setValue(fileinfo.fileName() + "/filePath", filePath);
 			ui.FileTableWidget->setCellWidget(pos / 5, pos % 5, m_fileList[pos]);
@@ -280,6 +282,41 @@ void MainWindow::onMenuItemClicked()
 		break;
 	}
 }
+
+//void MainWindow::onItemDelete(MainWindowItem* item)
+//{
+//	if (item->getType() == TOOL)
+//	{
+//		for (int i = 0; i < m_toolList.size(); i++)
+//		{
+//			if (item == m_toolList.at(i))
+//			{
+//				QSettings settings(QApplication::applicationDirPath() + "/ToolInfo.ini", QSettings::IniFormat);
+//				settings.remove(item->getFileName() + "/type");
+//				settings.remove(item->getFileName() + "/filePath");
+//				m_toolList.removeAt(i);
+//				gFileList.removeAt(i);
+//				delete item;
+//			}
+//		}
+//	}
+//	else if (item->getType() == REG_FILE || item->getType() == FOLDER)
+//	{
+//		for (int i = 0; i < m_fileList.size(); i++)
+//		{
+//			if (item == m_fileList.at(i))
+//			{
+//				QSettings settings(QApplication::applicationDirPath() + "/fileInfo.ini", QSettings::IniFormat);
+//				settings.remove(item->getFileName() + "/type");
+//				settings.remove(item->getFileName() + "/filePath");
+//				m_fileList.removeAt(i);
+//				gFileList.removeAt(i);
+//				delete item;
+//			}
+//		}
+//	}
+//	updateTable();
+//}
 
 void MainWindow::onSearchLineEditChanged()
 {

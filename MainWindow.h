@@ -27,6 +27,7 @@ private slots:
 	void onMenuBtnClicked();
 	void onMenuItemClicked();
 	void onSearchLineEditChanged();
+	//void onItemDelete(MainWindowItem*);
 
 protected:
 	virtual void paintEvent(QPaintEvent* event);

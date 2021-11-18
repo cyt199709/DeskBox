@@ -71,7 +71,7 @@ void MainWindowItem::getFileInfo()
 		QFileIconProvider iconProvider;
 		m_fileIcon = iconProvider.icon(fileInfo);
 		m_fileName = fileInfo.fileName();
-		if (!m_fileName.contains(".exe") && m_type == TOOL)
+		if (!m_fileName.contains(".exe") && !m_fileName.contains(".lnk") && !m_fileName.contains(".url") && m_type == TOOL)
 			return;
 		painter.drawPixmap(10, 0, 50, 50, m_fileIcon.pixmap(50, 50));
 	}
@@ -251,7 +251,7 @@ void MainWindowItem::onActionClicked()
 		break;
 		QDesktopServices::openUrl(QUrl::fromLocalFile(m_filePath));
 	case 2:
-		emit signalItemDelete(m_type, m_filePath);
+		emit signalItemDelete(this);
 		break;
 	case 3:
 		path = QFileDialog::getOpenFileName(this, QString::fromLocal8Bit("选择文件"), ".", QString::fromLocal8Bit("所有文件 (*.*)"));
