@@ -38,8 +38,10 @@ void MainWindow::initControl()
 	connect(ui.MenuBtn, &QPushButton::clicked, this, &MainWindow::onMenuBtnClicked);
 	ui.ToolTableWidget->setColumnCount(5);
 	ui.ToolTableWidget->setRowCount(16);
+	ui.ToolTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
 	ui.FileTableWidget->setColumnCount(5);
 	ui.FileTableWidget->setRowCount(16);
+	ui.FileTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
 	getIniInfo();
 
 	connect(ui.SearchLineEdit, &QLineEdit::textChanged, this, &MainWindow::onSearchLineEditChanged);
@@ -80,6 +82,7 @@ void MainWindow::getIniInfo()
 		{
 			m_fileList.push_back(item);
 			gFileList.push_back(item->getFilePath());
+			connect(item, &MainWindowItem::signalItemPress, this, &MainWindow::onItemClicked);
 		}
 		else
 			delete item;
@@ -95,11 +98,11 @@ void MainWindow::getIniInfo()
 		{
 			m_toolList.push_back(item);
 			gFileList.push_back(item->getFilePath());
+			connect(item, &MainWindowItem::signalItemPress, this, &MainWindow::onItemClicked);
 		}
 		else
 			delete item;
 	}
-
 	updateTable();
 }
 
@@ -157,6 +160,7 @@ void MainWindow::onAddClicked(TYPE type, QString filePath)
 			toolSettings.setValue(fileinfo.fileName() + "/type", type);
 			toolSettings.setValue(fileinfo.fileName() + "/filePath", filePath);
 			ui.ToolTableWidget->setCellWidget(pos / 5, pos % 5, m_toolList[pos]);
+			connect(item, &MainWindowItem::signalItemPress, this, &MainWindow::onItemClicked);
 		}
 		else
 			delete item;
@@ -177,6 +181,7 @@ void MainWindow::onAddClicked(TYPE type, QString filePath)
 			fileSettings.setValue(fileinfo.fileName() + "/type", type);
 			fileSettings.setValue(fileinfo.fileName() + "/filePath", filePath);
 			ui.FileTableWidget->setCellWidget(pos / 5, pos % 5, m_fileList[pos]);
+			connect(item, &MainWindowItem::signalItemPress, this, &MainWindow::onItemClicked);
 		}
 		else 
 			delete item;
@@ -196,6 +201,7 @@ void MainWindow::onAddClicked(TYPE type, QString filePath)
 			fileSettings.setValue(fileinfo.fileName() + "/type", type);
 			fileSettings.setValue(fileinfo.fileName() + "/filePath", filePath);
 			ui.FileTableWidget->setCellWidget(pos / 5, pos % 5, m_fileList[pos]);
+			connect(item, &MainWindowItem::signalItemPress, this, &MainWindow::onItemClicked);
 		}
 		else
 			delete item;
@@ -284,4 +290,30 @@ void MainWindow::onSearchLineEditChanged()
 void MainWindow::paintEvent(QPaintEvent* event)
 {
 	return BasicWindow::paintEvent(event);
+}
+
+void MainWindow::onItemClicked(MainWindowItem* item)
+{
+	foreach(MainWindowItem* tool, m_toolList)
+	{
+		if (tool == item)
+		{
+			item->setFocus();
+		}
+		else
+		{
+			tool->clearFocus();
+		}
+	}
+	foreach(MainWindowItem* file, m_fileList)
+	{
+		if (file == item)
+		{
+			item->setFocus();
+		}
+		else
+		{
+			file->clearFocus();
+		}
+	}
 }

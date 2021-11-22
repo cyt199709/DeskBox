@@ -120,6 +120,7 @@ void MainWindowItem::mouseDoubleClickEvent(QMouseEvent* event)
 
 void MainWindowItem::mousePressEvent(QMouseEvent* event)
 {
+	emit signalItemPress(this);
 	if (event->button() == Qt::LeftButton)
 	{
 		if (m_type != ADD_TOOL && m_type != ADD_FILE)
@@ -193,6 +194,10 @@ void MainWindowItem::mouseReleaseEvent(QMouseEvent* event)
 	m_isPressed = false;
 }
 
+void MainWindowItem::mouseMoveEvent(QMouseEvent* event)
+{
+}
+
 void MainWindowItem::paintEvent(QPaintEvent* event)
 {
 	QPixmap pixmap(70, 50);
@@ -222,6 +227,14 @@ void MainWindowItem::paintEvent(QPaintEvent* event)
 	m_name->setText(name);
 	m_name->setToolTip(m_fileName);
 	m_icon->setPixmap(pixmap);
+
+	if (hasFocus() && m_type != ADD_TOOL && m_type != ADD_FILE)
+	{
+		QPixmap pix(80, 80);
+		pix.fill(QColor(14, 90, 164, 128));
+		QPainter painter(this);
+		painter.drawPixmap(rect(), pix);
+	}
 }
 
 QString MainWindowItem::getFileName()
