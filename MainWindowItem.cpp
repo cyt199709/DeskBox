@@ -25,7 +25,32 @@ MainWindowItem::MainWindowItem(QWidget *parent, TYPE type, const QString& filePa
 	QFileInfo fileinfo(filePath);
 	if (!fileinfo.exists() && !filePath.isEmpty())
 	{
-		QMessageBox::information(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("文件不存在"));
+		if (type == REG_FILE || type == TOOL)
+		{
+			QMessageBox::information(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("文件") + filePath + QString::fromLocal8Bit("不存在"));
+			if (type == REG_FILE)
+			{
+				QSettings settings(QApplication::applicationDirPath() + "/fileInfo.ini", QSettings::IniFormat);
+				settings.beginGroup(fileinfo.fileName());
+				settings.remove("");
+				settings.endGroup();
+			}
+			else
+			{
+				QSettings settings(QApplication::applicationDirPath() + "/ToolInfo.ini", QSettings::IniFormat);
+				settings.beginGroup(fileinfo.fileName());
+				settings.remove("");
+				settings.endGroup();
+			}
+		}
+		else if (type == FOLDER)
+		{
+			QMessageBox::information(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("目录") + filePath + QString::fromLocal8Bit("不存在"));
+			QSettings settings(QApplication::applicationDirPath() + "/fileInfo.ini", QSettings::IniFormat);
+			settings.beginGroup(fileinfo.fileName());
+			settings.remove("");
+			settings.endGroup();
+		}
 		return;
 	}
 	initControl();
