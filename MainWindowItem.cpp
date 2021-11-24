@@ -96,7 +96,7 @@ void MainWindowItem::getFileInfo()
 		QFileIconProvider iconProvider;
 		m_fileIcon = iconProvider.icon(fileInfo);
 		m_fileName = fileInfo.fileName();
-		if (!m_fileName.contains(".exe") && m_type == TOOL)
+		if (!fileInfo.isExecutable() && !fileInfo.isFile())
 			return;
 		painter.drawPixmap(10, 0, 50, 50, m_fileIcon.pixmap(50, 50));
 	}
@@ -132,11 +132,17 @@ void MainWindowItem::mouseDoubleClickEvent(QMouseEvent* event)
 	else if(m_type == ADD_TOOL)
 	{
 		QString path = QFileDialog::getOpenFileName(this, QString::fromLocal8Bit("选择文件"), ".", QString::fromLocal8Bit("可执行文件 (*.exe)"));
+		QFileInfo fileInfo(path);
+		if (fileInfo.isSymLink())
+			path = fileInfo.symLinkTarget();
 		emit signalAddClicked(TOOL, path);
 	}
 	else if (m_type == ADD_FILE)
 	{
 		QString path = QFileDialog::getOpenFileName(this, QString::fromLocal8Bit("选择文件"), ".", QString::fromLocal8Bit("所有文件 (*.*)"));
+		QFileInfo fileInfo(path);
+		if (fileInfo.isSymLink())
+			path = fileInfo.symLinkTarget();
 		emit signalAddClicked(REG_FILE, path);
 	}
 
@@ -208,11 +214,17 @@ void MainWindowItem::mouseReleaseEvent(QMouseEvent* event)
 		if (m_type == ADD_TOOL) 
 		{
 			QString path = QFileDialog::getOpenFileName(this, QString::fromLocal8Bit("选择文件"), ".", QString::fromLocal8Bit("可执行文件 (*.exe)"));
+			QFileInfo fileInfo(path);
+			if (fileInfo.isSymLink())
+				path = fileInfo.symLinkTarget();
 			emit signalAddClicked(TOOL, path);
 		}
 		if (m_type == ADD_FILE)
 		{
 			QString path = QFileDialog::getOpenFileName(this, QString::fromLocal8Bit("选择文件"), ".", QString::fromLocal8Bit("所有文件 (*.*)"));
+			QFileInfo fileInfo(path);
+			if (fileInfo.isSymLink())
+				path = fileInfo.symLinkTarget();
 			emit signalAddClicked(REG_FILE, path);
 		}
 	}
@@ -292,13 +304,23 @@ void MainWindowItem::onActionClicked()
 		emit signalItemDelete(m_type, m_filePath);
 		break;
 	case 3:
+	{
 		path = QFileDialog::getOpenFileName(this, QString::fromLocal8Bit("选择文件"), ".", QString::fromLocal8Bit("所有文件 (*.*)"));
+		QFileInfo fileInfo(path);
+		if (fileInfo.isSymLink())
+			path = fileInfo.symLinkTarget();
 		emit signalAddClicked(REG_FILE, path);
 		break;
+	}
 	case 4:
+	{
 		path = QFileDialog::getExistingDirectory(this, QString::fromLocal8Bit("选择文件"), ".");
+		QFileInfo fileInfo(path);
+		if (fileInfo.isSymLink())
+			path = fileInfo.symLinkTarget();
 		emit signalAddClicked(FOLDER, path);
 		break;
+	}
 	default:
 		break;
 	}

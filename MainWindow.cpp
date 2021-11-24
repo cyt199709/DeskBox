@@ -13,6 +13,7 @@
 #include <QMessageBox>
 #include <QFileInfo>
 #include <QSystemTrayIcon>
+#include <QMimeData>
 
 QList<QString> gFileList;
 
@@ -26,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
 	setTitleBarTitle("", ":/Resources/Icon/big_logo.png");
 	loadStyleSheet("MainWindow");
 	initControl();
+	setAcceptDrops(true);
 }
 
 MainWindow::~MainWindow()
@@ -38,9 +40,15 @@ void MainWindow::initControl()
 	connect(ui.MenuBtn, &QPushButton::clicked, this, &MainWindow::onMenuBtnClicked);
 	ui.ToolTableWidget->setColumnCount(5);
 	ui.ToolTableWidget->setRowCount(16);
+	ui.ToolTableWidget->setAcceptDrops(true);
+	ui.ToolTableWidget->setDragEnabled(true);
+	ui.ToolTableWidget->setDragDropMode(QAbstractItemView::DragDrop);
 	ui.ToolTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
 	ui.FileTableWidget->setColumnCount(5);
 	ui.FileTableWidget->setRowCount(16);
+	ui.FileTableWidget->setAcceptDrops(true);
+	ui.FileTableWidget->setDragEnabled(true);
+	ui.FileTableWidget->setDragDropMode(QAbstractItemView::DragDrop);
 	ui.FileTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
 	getIniInfo();
 
@@ -77,6 +85,9 @@ void MainWindow::getIniInfo()
 		QString filePath = fileSettings.value("filePath").toString();
 		TYPE type = (TYPE)fileSettings.value("type").toInt();
 		fileSettings.endGroup();
+		QFileInfo fileInfo(filePath);
+		if(fileInfo.isSymLink())
+			filePath = fileInfo.symLinkTarget();
 		MainWindowItem* item = new MainWindowItem(ui.FileTableWidget, type, filePath);
 		if (item->createSuccess())
 		{
@@ -93,6 +104,9 @@ void MainWindow::getIniInfo()
 	{
 		QString filePath = ToolSettings.value(file + "/filePath").toString();
 		TYPE type = (TYPE)ToolSettings.value("type").toInt();
+		QFileInfo fileInfo(filePath);
+		if (fileInfo.isSymLink())
+			filePath = fileInfo.symLinkTarget();
 		MainWindowItem* item = new MainWindowItem(ui.FileTableWidget, type, filePath);
 		if (item->createSuccess())
 		{
@@ -120,7 +134,7 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
 		ui.SearchLineEdit->clearFocus();
 		this->setFocus();
 	}
-	return false;
+	return QWidget::eventFilter(obj, event);
 }
 
 void MainWindow::updateTable()
@@ -315,5 +329,36 @@ void MainWindow::onItemClicked(MainWindowItem* item)
 		{
 			file->clearFocus();
 		}
+	}
+}
+
+void MainWindow::dragEnterEvent(QDragEnterEvent* event)
+{
+	event->accept();
+}
+
+void MainWindow::dragMoveEvent(QDragMoveEvent* event)
+{
+
+}
+
+void MainWindow::dropEvent(QDropEvent* event)
+{
+	QList<QUrl> urls = event->mimeData()->urls();
+	if (urls.isEmpty())
+		return;
+
+	foreach(QUrl url, urls)
+	{
+		QString filePath = url.toLocalFile();
+		QFileInfo fileInfo(filePath);
+		if (fileInfo.isSymLink())
+			filePath = fileInfo.symLinkTarget();
+		if (fileInfo.isDir())
+			onAddClicked(FOLDER, filePath);
+		else if (fileInfo.isExecutable())
+			onAddClicked(TOOL, filePath);
+		else if (fileInfo.isFile())
+			onAddClicked(REG_FILE, filePath);
 	}
 }

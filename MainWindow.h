@@ -20,7 +20,6 @@ private:
 	void initControl();
 	void getIniInfo();
 	void updateSearchStyle();
-	bool eventFilter(QObject* obj, QEvent* event);
 	void updateTable();
 
 private slots:
@@ -32,6 +31,10 @@ private slots:
 
 protected:
 	virtual void paintEvent(QPaintEvent* event);
+	virtual bool eventFilter(QObject* obj, QEvent* event);
+	virtual void dragEnterEvent(QDragEnterEvent*);
+	virtual void dragMoveEvent(QDragMoveEvent*);
+	virtual void dropEvent(QDropEvent*);
 
 private:
 	Ui::MainWindow ui;
