@@ -275,6 +275,7 @@ void MainWindow::onMenuItemClicked()
 	default:
 		break;
 	}
+
 }
 
 void MainWindow::onSearchLineEditChanged()
