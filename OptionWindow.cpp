@@ -70,6 +70,12 @@ void OptionWindow::initStartWindow()
 
 	OptionWindowItem* startItem = new OptionWindowItem(start);
 	startItem->setContext(QString::fromLocal8Bit("设置开机自启"));
+	QSettings settings(QApplication::applicationDirPath() + "/" + QString("UserInfo.ini"), QSettings::IniFormat);
+	if (settings.value("Default/start").toBool())
+	{
+		startCheckBox->setChecked(true);
+	}
+
 	addWindow(start, startItem);
 	connect(startCheckBox, &QCheckBox::stateChanged, this, &OptionWindow::onStartStateChanged);
 	connect(startItem, &OptionWindowItem::signalClicked, this, &OptionWindow::onOptionWindowItemClicked);
@@ -96,6 +102,7 @@ void OptionWindow::onOptionWindowItemClicked()
 void OptionWindow::onStartStateChanged(int state)
 {
 	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::Registry64Format);
+	QSettings userSettings(QApplication::applicationDirPath() + "/" + QString("UserInfo.ini"), QSettings::IniFormat);
 	QFileInfo fileInfo(QApplication::applicationFilePath());
 	QString name = fileInfo.baseName();
 	QString path = settings.value(name).toString();
@@ -106,6 +113,7 @@ void OptionWindow::onStartStateChanged(int state)
 	}
 	else if (state == 2)
 	{
+		userSettings.setValue("Default/start", true);
 		QString newPath = QDir::toNativeSeparators(QApplication::applicationFilePath());
 		if (path != newPath)
 		{
